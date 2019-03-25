@@ -9,3 +9,7 @@ def homepage(request):
     else:
         return HttpResponse("placeholder for logged in")
 
+def about(request):
+    template = loader.get_template("webinterface/html/aboutUs.html")
+    return HttpResponse(template.render())
+
