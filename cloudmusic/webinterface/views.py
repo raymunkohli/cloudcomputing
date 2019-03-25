@@ -29,9 +29,9 @@ def loggedin(request):
             
         else:
             request.session['user'] = idinfo['email']
-            return homepage(request)
+            return redirect('/')
     except ValueError:
         print("broken")
-        return redirect('/')
+        return redirect('/aaaaaaaa')
     
 
