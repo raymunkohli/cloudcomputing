@@ -17,7 +17,6 @@ def about(request):
     template = loader.get_template("webinterface/html/aboutUs.html")
     return HttpResponse(template.render())
 
-@csrf_exempt
 def loggedin(request):
     try:
         token = request.POST.get("idtoken")

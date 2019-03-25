@@ -6,8 +6,9 @@ function onSignIn(googleUser) {
   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
   var xhr = new XMLHttpRequest();
   var id_token = googleUser.getAuthResponse().id_token;
-  xhr.open('POST', 'https://directed-sonar-234413.appspot.com/loggedin');
+  xhr.open('POST', 'localhost:1116/loggedin');
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
   xhr.onload = function() {
     console.log('Signed in as: ' + xhr.responseText);
   };
