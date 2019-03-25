@@ -8,7 +8,6 @@ function onSignIn(googleUser) {
   var id_token = googleUser.getAuthResponse().id_token;
   xhr.open('POST', 'localhost:1116/loggedin');
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
   xhr.onload = function() {
     console.log('Signed in as: ' + xhr.responseText);
   };
