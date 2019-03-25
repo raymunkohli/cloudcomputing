@@ -4,10 +4,11 @@ from django.template import loader
 from django.shortcuts import redirect
 from google.oauth2 import id_token
 from google.auth.transport import requests
-
+from django.views.decorators.csrf import csrf_exempt
 
 def homepage(request):
-    if request.session.get("id_token") is None :
+    print(request.session.get('user'))
+    if request.session.get("user") is None :
         template = loader.get_template("webinterface/html/index.html")
         return HttpResponse(template.render())
     else:
@@ -17,16 +18,20 @@ def about(request):
     template = loader.get_template("webinterface/html/aboutUs.html")
     return HttpResponse(template.render())
 
+@csrf_exempt
 def loggedin(request):
+    token = request.GET.get("idtoken")
     try:
-        token = request.POST.get("idtoken")
         idinfo = id_token.verify_oauth2_token(token, requests.Request(), "599761015615-krb4hqvd1m6nsl18r1am0glvcbdakb3d.apps.googleusercontent.com")
         if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-            raise ValueError('Wrong issuer.')
+            print("invalid")
+            return redirect('/12313')
+            
         else:
-            request.session['userid'] = idinfo['email']
-            return redirect('/')
+            request.session['user'] = idinfo['email']
+            return homepage(request)
     except ValueError:
-        pass
+        print("broken")
+        return redirect('/')
     
 
