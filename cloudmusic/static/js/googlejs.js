@@ -23,7 +23,7 @@ function onSignIn(googleUser) {
   console.log('Image URL: ' + profile.getImageUrl());
   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", "https://directed-sonar-234413.appspot.com/loggedin", true);
+  xhr.open("GET", "https://directed-sonar-234413.appspot.com/loggedin", true);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.setRequestHeader('X-CSRFToken', csrftoken);
   xhr.send(JSON.stringify({
