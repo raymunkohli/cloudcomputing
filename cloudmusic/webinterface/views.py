@@ -12,7 +12,8 @@ def homepage(request):
         template = loader.get_template("webinterface/html/index.html")
         return HttpResponse(template.render())
     else:
-        return HttpResponse("placeholder for logged in")
+        template = loader.get_template("webinterface/html/homePageLogin.html")
+        return HttpResponse(template.render())
 
 def about(request):
     template = loader.get_template("webinterface/html/aboutUs.html")
