@@ -24,6 +24,9 @@ function onSignIn(googleUser) {
   xhr.open("POST", "https://directed-sonar-234413.appspot.com/loggedin");
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
-  console.log("idtoken="+id_token)
-  xhr.send("idtoken="+id_token);
+  data = JSON.stringify({
+    "id_token":id_token
+  })
+  console.log(data)
+  xhr.send(data);
 }
