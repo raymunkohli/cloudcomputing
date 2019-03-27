@@ -20,8 +20,10 @@ def about(request):
 
 @csrf_exempt
 def loggedin(request):
-    token = request.GET.get("idtoken")
-    print("token: " + str(token))
+    for a in request.POST:
+        print(a)
+    token = request.POST.get("idtoken")
+    print("token-: " + str(token))
     try:
         idinfo = id_token.verify_oauth2_token(token, requests.Request(), "599761015615-krb4hqvd1m6nsl18r1am0glvcbdakb3d.apps.googleusercontent.com")
         if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:

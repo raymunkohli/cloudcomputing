@@ -21,10 +21,9 @@ function onSignIn(googleUser) {
   var id_token = googleUser.getAuthResponse().id_token;
   console.log('ID: ' + id_token); // Do not send to your backend! Use an ID token instead.
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", "https://directed-sonar-234413.appspot.com/loggedin", true);
+  xhr.open("POST", "https://directed-sonar-234413.appspot.com/loggedin");
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
-  xhr.send(JSON.stringify({
-    idtoken: id_token
-  }));
+  xhr.send("idtoken="+id_token);
+  console.log(xhr)
 }
