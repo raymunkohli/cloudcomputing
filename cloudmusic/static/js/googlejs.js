@@ -22,10 +22,11 @@ function onSignIn(googleUser) {
   console.log('ID: ' + id_token); // Do not send to your backend! Use an ID token instead.
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "https://directed-sonar-234413.appspot.com/loggedin");
-  xhr.setRequestHeader('Content-Type', 'x-www-form-urlencoded');
-  data = JSON.stringify({
-    "id_token":id_token
-  })
+  xhr.setRequestHeader('Content-Type', 'application/json');
   console.log("ayylmao")
-  xhr.send(data);
+  data = {
+    "id" : id_token
+  }
+  console.log(JSON.stringify(data))
+  xhr.send(JSON.stringify(data));
 }

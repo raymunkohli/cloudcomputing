@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from django.views.decorators.csrf import csrf_exempt
-
+import json
 def homepage(request):
     print(request.session.get('user'))
     if request.session.get("user") is None :
@@ -20,10 +20,8 @@ def about(request):
 
 @csrf_exempt
 def loggedin(request):
-    for a in request.POST:
-        print("asdf"+a)
-    token = request.POST.get("id_token")
-    print("token-: " + str(token))
+    json_data = json.loads(request.body.decode("utf-8"))
+    token = json_data["id"]
     try:
         idinfo = id_token.verify_oauth2_token(token, requests.Request(), "599761015615-krb4hqvd1m6nsl18r1am0glvcbdakb3d.apps.googleusercontent.com")
         if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
