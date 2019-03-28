@@ -69,3 +69,9 @@ def updatelibrary(request):
     )
     print(songs)
     return render_to_response("webinterface/html/updatelibrary.html",{"songs":songs} )
+
+def logout(request):
+    del request.session['user']
+    request.session.modified = True
+    return redirect("/")
+

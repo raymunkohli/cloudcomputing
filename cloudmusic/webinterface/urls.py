@@ -9,5 +9,6 @@ urlpatterns = [
     path('loggedin', csrf_exempt(views.loggedin), name='loggedin'),
     path('addsong', views.addsong, name = "addsong"),
     path('viewlibrary', views.viewlibrary, name="viewlibrary"),
-    path('updatelibrary', views.updatelibrary, name="updatelibrary")
+    path('updatelibrary', views.updatelibrary, name="updatelibrary"),
+    path('logout', views.logout, name="logout")
 ]
