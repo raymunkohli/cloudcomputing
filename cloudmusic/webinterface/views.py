@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader, RequestContext
 from django.shortcuts import redirect
@@ -54,13 +54,19 @@ def addsong(request):
     return redirect('/')
 
 def viewlibrary(request):
-    if request.session.get("user") is not None :
-        template = loader.get_template("webinterface/html/library.html")
-        return HttpResponse(template.render())
-    else:
-        return redirect('/')
+    template = loader.get_template("webinterface/html/library.html")
+    return HttpResponse(template.render())
 
+@csrf_exempt
 def updatelibrary(request):
-    return
-
-
+    json_data = json.loads(request.body.decode("utf-8"))
+    songs = Song.objects.filter(
+        song_name__contains= json_data["name"], 
+        year__contains= json_data["year"],
+        genre__contains= json_data["genre"],
+        artist__contains= json_data["artist"],
+        language__contains= json_data["lang"],
+        userid__equals= request.session.get('user'),
+    )
+    print(songs)
+    return render_to_response("webinterface/html/updatelibrary.html",{"songs":songs} )

@@ -1,0 +1,16 @@
+
+
+{% block content %}
+<table >
+    <th><td>Name</td><td>Language</td><td>Artist</td><td>Album</td><td>Year</td><td>Genre</td><td>URL</td></th>
+{% for song in songs %}
+<tr><td>{{song.song_name}}</td>
+    <td>{{song.language}}</td>
+    <td>{{song.artist}}</td>
+    <td>{{song.album}}</td>
+    <td>{{song.year}}</td>
+    <td>{{song.genre}}</td>
+    <td>{{song.url}}</td></tr>
+{% endfor %}
+</table>
+{% endblock %}
