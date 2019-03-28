@@ -3,28 +3,6 @@ from django.db import models
 # Create your models here.
 
 
-class Album(models.Model):
-    idalbum = models.IntegerField(db_column='idAlbum', primary_key=True)  # Field name made lowercase.
-    album_name = models.CharField(max_length=45, blank=True, null=True)
-    artist_idartist = models.ForeignKey('Artist', models.DO_NOTHING, db_column='artist_idArtist', blank=True, null=True)  # Field name made lowercase.
-    band_idband = models.ForeignKey('Band', models.DO_NOTHING, db_column='band_idBand', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'album'
-
-
-class Artist(models.Model):
-    idartist = models.AutoField(db_column='idArtist', primary_key=True)  # Field name made lowercase.
-    artist_name = models.CharField(max_length=45, blank=True, null=True)
-    country = models.CharField(max_length=45, blank=True, null=True)
-    band_idband = models.ForeignKey('Band', models.DO_NOTHING, db_column='band_idBand', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'artist'
-
-
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=80)
 
@@ -91,15 +69,6 @@ class AuthUserUserPermissions(models.Model):
         unique_together = (('user', 'permission'),)
 
 
-class Band(models.Model):
-    idband = models.IntegerField(db_column='idBand', primary_key=True)  # Field name made lowercase.
-    band_name = models.CharField(max_length=45, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'band'
-
-
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
     object_id = models.TextField(blank=True, null=True)
@@ -149,11 +118,11 @@ class Song(models.Model):
     song_name = models.CharField(max_length=45, blank=True, null=True)
     link = models.CharField(max_length=255, blank=True, null=True)
     language = models.CharField(max_length=45, blank=True, null=True)
-    album_idalbum = models.ForeignKey(Album, models.DO_NOTHING, db_column='album_idAlbum', null=True)  # Field name made lowercase.
     image = models.TextField(blank=True, null=True)
     year = models.IntegerField(blank=True, null=True)
     genre = models.CharField(max_length=45, blank=True, null=True)
     userid = models.CharField(max_length=255)
+    artist = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         managed = False

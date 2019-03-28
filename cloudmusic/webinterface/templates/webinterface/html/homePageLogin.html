@@ -59,36 +59,32 @@ and open the template in the editor.
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-6">
-                            <form action="#">
+                            <form action="/addsong" method="post">{% csrf_token %} 
                                 <fieldset>
                                     <legend>Song Information(Storing):</legend>
                                     <div class="control">
                                         <label for="name">Name: </label>
-                                        <input type="text" id="form" />
+                                        <input type="text" id="form" name="name"/>
                                     </div>
                                     <div class="control">
                                         <label for="language">Language: </label>
-                                        <input type="text" id="form" />
+                                        <input type="text" id="form" name="lang"/>
                                     </div>
                                     <div class="control">
-                                        <label for="singer">Singer: </label>
-                                        <input type="text" id="form" />
-                                    </div>
-                                    <div class="control">
-                                        <label for="band">Band: </label>
-                                        <input type="text" id="form" />
+                                        <label for="artist">Artist: </label>
+                                        <input type="text" id="form" name="artist"/>
                                     </div>
                                     <div class="control">
                                         <label for="album">Album: </label>
-                                        <input type="text" id="form" />
+                                        <input type="text" id="form" name="album"/>
                                     </div>
                                     <div class="control">
                                         <label for="year">Year: </label>
-                                        <input type="text" id="form" />
+                                        <input type="month" id="form" name="year"/>
                                     </div>
                                     <div class="control">
                                         <label for="genre">Genre: </label>
-                                        <select>
+                                        <select name="genre">
                                             <option value="Blues">Blues</option>
                                             <option value="Classical">Classical</option> 
                                             <option value="Country">Country</option> 
@@ -100,13 +96,13 @@ and open the template in the editor.
                                     </div>
                                     <div class="control">
                                         <label for="url">Youtube URL: </label>
-                                        <input type="url" id="form" />
+                                        <input type="url" id="form" name="url" />
                                     </div>
                                     <div class="control">
-                                        <label for="image">Image: </label>
+                                        <label for="image" >Image: </label>
                                     </div>
                                     <div class="other">
-                                        <input id="form" type="file" />
+                                        <input id="form" type="file" name="image"/>
                                     </div>
                                     <div class="other">
                                         <input type="submit" id="form" />

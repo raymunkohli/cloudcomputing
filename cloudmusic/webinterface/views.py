@@ -1,11 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.template import loader
+from django.http import HttpResponse, HttpResponseRedirect
+from django.template import loader, RequestContext
 from django.shortcuts import redirect
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from django.views.decorators.csrf import csrf_exempt
 from webinterface.models import Song
+from django.db.models import *
+import webinterface.models
 import json
 def homepage(request):
     print(request.session.get('user'))
@@ -36,10 +38,19 @@ def loggedin(request):
         print("error")
         return redirect('/')
 
+@csrf_exempt
 def addsong(request):
     if request.session.get("user") is not None :
-        song = Song(song_name="123", userid = request.session.get("user"))
+        song = Song(song_name=request.POST.get("name"), 
+                    userid = request.session.get("user"),
+                    link = request.POST.get("url"),
+                    language = request.POST.get("lang"),
+                    image = request.FILES.get("image"),
+                    year = request.POST.get("year"),
+                    genre = request.POST.get("genre"),
+                    artist = request.POST.get("artist")
+                    )
         song.save()
     return redirect('/')
-    
+
 
