@@ -53,4 +53,14 @@ def addsong(request):
         song.save()
     return redirect('/')
 
+def viewlibrary(request):
+    if request.session.get("user") is not None :
+        template = loader.get_template("webinterface/html/library.html")
+        return HttpResponse(template.render())
+    else:
+        return redirect('/')
+
+def updatelibrary(request):
+    return
+
 

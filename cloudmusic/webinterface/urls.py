@@ -7,5 +7,7 @@ urlpatterns = [
     path('', views.homepage, name='homepage'),
     path('about', views.about, name='about'),
     path('loggedin', csrf_exempt(views.loggedin), name='loggedin'),
-    path('addsong', views.addsong, name = "addsong")
+    path('addsong', views.addsong, name = "addsong"),
+    path('viewlibrary', views.viewlibrary, name="viewlibrary"),
+    path('updatelibrary', views.updatelibrary, name="updatelibrary")
 ]
