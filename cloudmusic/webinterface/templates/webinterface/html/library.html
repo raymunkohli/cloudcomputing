@@ -10,8 +10,10 @@ and open the template in the editor.
     <title>Personal Library</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <!-- jQuery library -->
+    <meta name="google-signin-client_id" content="599761015615-krb4hqvd1m6nsl18r1am0glvcbdakb3d.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+    <script src="static/js/googlejs.js"> </script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="static/css/library.css">
@@ -39,7 +41,7 @@ and open the template in the editor.
                 </div>
                 <ul class="nav navbar-nav navbar-left">
                     <li><a href="/">Home</a></li>
-                    <li><a href="/logout">Logout</a></li>
+                    <li><a href="/logout" onclick="signOut();">Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -91,7 +93,36 @@ and open the template in the editor.
             </div>
         </section>
         <br>
-        <div id="tables"></div>
+        <div id="tables">{% block content %}
+                <table class="table table-dark">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Language</th>
+                        <th scope="col">Artist</th>
+                        <th scope="col">Album</th>
+                        <th scope="col">Year</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">URL</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                {% for song in songs %}
+                <tr>
+                    <td>{{song.song_name}}</td>
+                    <td>{{song.language}}</td>
+                    <td>{{song.artist}}</td>
+                    <td>{{song.album}}</td>
+                    <td>{{song.year}}</td>
+                    <td>{{song.genre}}</td>
+                    <td>{{song.link}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+                
+                </table>
+                {% endblock %}</div>
         <!--Information bit-->
         <section id="information">
             <div class="container">
@@ -155,7 +186,6 @@ and open the template in the editor.
             function alertContents() {
                 if (httpRequest.readyState === XMLHttpRequest.DONE) {
                     if (httpRequest.status === 200) {
-                        alert(httpRequest.responseText);
                         document.getElementById("tables").innerHTML = httpRequest.responseText;
                     } else {
                         alert('There was a problem with the request.');

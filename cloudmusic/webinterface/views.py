@@ -53,8 +53,10 @@ def addsong(request):
     return redirect('/')
 
 def viewlibrary(request):
-    template = loader.get_template("webinterface/html/library.html")
-    return HttpResponse(template.render())
+    songs = Song.objects.filter(
+        userid__exact= request.session.get('user'),
+    )
+    return render_to_response("webinterface/html/library.html",{"songs":songs} )
 
 @csrf_exempt
 def updatelibrary(request):
@@ -67,7 +69,6 @@ def updatelibrary(request):
         language__contains= json_data["lang"],
         userid__exact= request.session.get('user'),
     )
-    print(songs)
     return render_to_response("webinterface/html/updatelibrary.html",{"songs":songs} )
 
 def logout(request):

@@ -9,8 +9,10 @@ and open the template in the editor.
         <title>Cloud Music Library Home Page(Log-in)</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
         <!-- jQuery library -->
+        <meta name="google-signin-client_id" content="599761015615-krb4hqvd1m6nsl18r1am0glvcbdakb3d.apps.googleusercontent.com">
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="static/js/googlejs.js"> </script>/>
+        <script src="static/js/googlejs.js"> </script>
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="static/css/homePageLogin.css">
@@ -30,11 +32,19 @@ and open the template in the editor.
                         <a href=""><img class="logo" src="static/images/logo.png"></a>
                     </div>
 
-
+                    <a href="#" onclick="signOut1();">Sign out</a>
+                    <script>
+                      function signOut1() {
+                        var auth2 = gapi.auth2.getAuthInstance();
+                        auth2.signOut().then(function () {
+                          console.log('User signed out.');
+                        });
+                      }
+                    </script>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/">Home</a></li>
                         <li><a href="/viewlibrary">Library</a></li>
-                        <li><a href="/logout">Logout</a></li>
+                        <li><a href="/logout" onclick="signOut();">Logout</a></li>
                     </ul>
 
                 </div>
@@ -96,12 +106,6 @@ and open the template in the editor.
                                     <div class="control">
                                         <label for="url">Youtube URL: </label>
                                         <input type="url" id="form" name="url" required/>
-                                    </div>
-                                    <div class="control">
-                                        <label for="image" >Image: </label>
-                                    </div>
-                                    <div class="other">
-                                        <input id="form" type="file" name="image"/>
                                     </div>
                                     <div class="other">
                                         <input type="submit" id="form" />
