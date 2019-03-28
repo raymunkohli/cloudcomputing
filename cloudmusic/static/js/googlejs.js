@@ -29,7 +29,7 @@ function onSignIn(googleUser) {
   }
   console.log(JSON.stringify(data))
   xhr.send(JSON.stringify(data));
-  xhr.onloadend(
+  xhr.onloadend = function (){
     location.reload()
-  )
+  }
 }
