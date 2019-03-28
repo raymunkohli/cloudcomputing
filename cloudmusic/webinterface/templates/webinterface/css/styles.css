@@ -1,0 +1,136 @@
+*{
+    margin:0;
+    padding: 0;
+}
+
+.header{
+    height: 100vh;
+}
+
+.navbar-style{
+    box-shadow: 0 5px 10px #efefef;
+    text-transform: uppercase;
+}
+
+.logo{
+    height: 50px;
+    padding: 0px 8px;
+}
+
+li a{
+    color: blue;
+}
+
+.large-text{
+    font-size: 40px;
+    margin: 40px;
+    color: blue;
+}
+
+a.btn{
+    margin: 20px 20px;
+    width: 180px;
+    padding: 10px;
+    border-radius: 25px;
+
+}
+
+
+a.btnAbout{
+    background-color: dodgerblue;
+    color: white;
+}
+
+.row{
+    padding: 20px;
+}
+
+#about{
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+#about .col-md-6{
+    padding: 20px 10px;
+}
+
+#about h3{
+    margin: 20px auto;
+}
+
+/*Information Bit*/
+#information{
+    background-color: #efefef;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#information .co.col-md-4{
+    padding: 20px;
+}
+
+#information .co.col-md-4 h4{
+    padding: 10px;
+    color: brown
+}
+
+#information .co.col-md-4 p{
+    padding: 10px;
+    text-align: justify;
+}
+
+/*Footer Information*/
+.footer{
+    padding: 20px 20px;
+    position: relative;
+    
+}
+
+.footer h3, .footer p{
+    color: black;
+
+}
+
+/* Style all font awesome icons */
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+  .fa:hover {
+    opacity: 0.7;
+  }
+  
+  
+  /* Facebook */
+  .fa-facebook {
+    background: #3B5998;
+    color: white;
+  }
+  
+  /* Twitter */
+  .fa-twitter {
+    background: #55ACEE;
+    color: white;
+  }
+
+  /* Youtube */
+  .fa-youtube {
+    background: rgb(238, 95, 85);
+    color: white;
+  }
+
+  .fa {
+    padding: 10px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+  }
+
+
+

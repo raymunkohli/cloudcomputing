@@ -19,7 +19,18 @@ and open the template in the editor.
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+        <script>
+        function readURL(input){
+            if(input.files && input.files[0])
+            {
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('show').attr('src',e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        </script>
     </head>
     <body>
         <!--Navbar-->
@@ -64,31 +75,31 @@ and open the template in the editor.
                                     <legend>Song Information(Storing):</legend>
                                     <div class="control">
                                         <label for="name">Name: </label>
-                                        <input type="text" id="form" />
+                                        <input type="text" id="form" name="name"/>
                                     </div>
                                     <div class="control">
                                         <label for="language">Language: </label>
-                                        <input type="text" id="form" />
+                                        <input type="text" id="form" name="lang"/>
                                     </div>
                                     <div class="control">
                                         <label for="singer">Singer: </label>
-                                        <input type="text" id="form" />
+                                        <input type="text" id="form" name="singer"/>
                                     </div>
                                     <div class="control">
                                         <label for="band">Band: </label>
-                                        <input type="text" id="form" />
+                                        <input type="text" id="form"name="band" />
                                     </div>
                                     <div class="control">
                                         <label for="album">Album: </label>
-                                        <input type="text" id="form" />
+                                        <input type="text" id="form" name="album"/>
                                     </div>
                                     <div class="control">
                                         <label for="year">Year: </label>
-                                        <input type="text" id="form" />
+                                        <input type="text" id="form" name="year"/>
                                     </div>
                                     <div class="control">
                                         <label for="genre">Genre: </label>
-                                        <select>
+                                        <select name ="genre">
                                             <option value="Blues">Blues</option>
                                             <option value="Classical">Classical</option> 
                                             <option value="Country">Country</option> 
@@ -100,13 +111,13 @@ and open the template in the editor.
                                     </div>
                                     <div class="control">
                                         <label for="url">Youtube URL: </label>
-                                        <input type="url" id="form" />
+                                        <input type="url" id="form" name="url" />
                                     </div>
                                     <div class="control">
                                         <label for="image">Image: </label>
                                     </div>
                                     <div class="other">
-                                        <input id="form" type="file" />
+                                        <input id="form" type="file" onchange="readeURL(this);" accept="image/*" name="image"/>
                                     </div>
                                     <div class="other">
                                         <input type="submit" id="form" />
@@ -115,7 +126,7 @@ and open the template in the editor.
                             </form>
                         </div>
                         <div class="col-sm-5">
-                            <img src="images/music_default.png" class="img-responsive" width="450" height="450">
+                            <img src="images/music_default.png" class="img-responsive" width="450" height="450" id="show">
                         </div>
                     </div>
                 </div>
