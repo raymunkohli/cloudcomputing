@@ -123,6 +123,7 @@ class Song(models.Model):
     genre = models.CharField(max_length=45, blank=True, null=True)
     userid = models.CharField(max_length=255)
     artist = models.CharField(max_length=255, blank=True, null=True)
+    album = models.CharField(max_length=255)
 
     class Meta:
         managed = False

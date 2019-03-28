@@ -45,11 +45,10 @@ def addsong(request):
                     userid = request.session.get("user"),
                     link = request.POST.get("url"),
                     language = request.POST.get("lang"),
-                    image = request.FILES.get("image"),
                     year = request.POST.get("year"),
                     genre = request.POST.get("genre"),
-                    artist = request.POST.get("artist")
-                    )
+                    artist = request.POST.get("artist"),
+                    album = request.POST.get("album"))
         song.save()
     return redirect('/')
 
@@ -66,7 +65,7 @@ def updatelibrary(request):
         genre__contains= json_data["genre"],
         artist__contains= json_data["artist"],
         language__contains= json_data["lang"],
-        userid__equals= request.session.get('user'),
+        userid__exact= request.session.get('user'),
     )
     print(songs)
     return render_to_response("webinterface/html/updatelibrary.html",{"songs":songs} )
