@@ -194,62 +194,63 @@ and open the template in the editor.
 
             </table>
             {% endblock %}
-            <!--Information bit-->
-            <section id="information">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="static/images/musicCloud.png" width="100" height="50">
-                            <h4>Music</h4>
-                            <p>Find the music you like</p>
-                        </div>
+        </div>
+        <!--Information bit-->
+        <section id="information">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="static/images/musicCloud.png" width="100" height="50">
+                        <h4>Music</h4>
+                        <p>Find the music you like</p>
+                    </div>
 
-                        <div class="col-md-4">
-                            <img src="static/images/musicLib.png" width="100" height="50">
-                            <h4>Music Library</h4>
-                            <p>Find them, save them </p>
-                        </div>
+                    <div class="col-md-4">
+                        <img src="static/images/musicLib.png" width="100" height="50">
+                        <h4>Music Library</h4>
+                        <p>Find them, save them </p>
+                    </div>
 
-                        <div class="col-md-4">
-                            <img src="static/images/musicData.png" width="100" height="50">
-                            <h4>Data</h4>
-                            <p>Find the music you like</p>
-                        </div>
+                    <div class="col-md-4">
+                        <img src="static/images/musicData.png" width="100" height="50">
+                        <h4>Data</h4>
+                        <p>Find the music you like</p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!--Footer-->
-            <section id="footer">
-                <div class="container">
-                    <div class="footer text-center">
-                        <h3>Join Us Now</h3>
-                        <p>Follow us on social media</p>
-                        <a href="#" class="fa fa-facebook"></a>
-                        <a href="#" class="fa fa-twitter"></a>
-                        <a href="#" class="fa fa-youtube"></a>
-                    </div>
+        <!--Footer-->
+        <section id="footer">
+            <div class="container">
+                <div class="footer text-center">
+                    <h3>Join Us Now</h3>
+                    <p>Follow us on social media</p>
+                    <a href="#" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-twitter"></a>
+                    <a href="#" class="fa fa-youtube"></a>
                 </div>
-            </section>
+            </div>
+        </section>
 
     </header>
 
 
     <script>
         function showCollection() {
-            var x = document.getElementById("form");
+            var x = document.getElementById("search");
             var httpRequest;
             httpRequest = new XMLHttpRequest();
             //document.getElementById("tables").innerHTML = this.responeseText;
             httpRequest.onreadystatechange = alertContents;
             httpRequest.open('POST', '/updatelibrary');
             data = {
-                name: x.form[1].value,
-                lang: x.form[2].value,
-                artist: x.form[3].value,
-                album: x.form[4].value,
-                year: x.form[5].value,
-                genre: x.form[6].value,
+                name: x.form[0].value,
+                lang: x.form[1].value,
+                artist: x.form[2].value,
+                album: x.form[3].value,
+                year: x.form[4].value,
+                genre: x.form[5].value,
             }
             console.log(data)
             httpRequest.send(JSON.stringify(data));

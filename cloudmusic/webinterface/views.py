@@ -61,6 +61,7 @@ def viewlibrary(request):
 @csrf_exempt
 def updatelibrary(request):
     json_data = json.loads(request.body.decode("utf-8"))
+    print(json.dumps(json_data))
     songs = Song.objects.filter(
         song_name__contains= json_data["name"], 
         year__contains= json_data["year"],
@@ -69,6 +70,7 @@ def updatelibrary(request):
         language__contains= json_data["lang"],
         userid__exact= request.session.get('user'),
     )
+    print(songs)
     return render_to_response("webinterface/html/updatelibrary.html",{"songs":songs} )
 
 def logout(request):
