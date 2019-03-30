@@ -119,7 +119,7 @@ class Song(models.Model):
     link = models.CharField(max_length=255, blank=True, null=True)
     language = models.CharField(max_length=45, blank=True, null=True)
     image = models.TextField(blank=True, null=True)
-    year = models.IntegerField(blank=True, null=True)
+    year = models.CharField(max_length=40, blank=True, null=True)
     genre = models.CharField(max_length=45, blank=True, null=True)
     userid = models.CharField(max_length=255)
     artist = models.CharField(max_length=255, blank=True, null=True)

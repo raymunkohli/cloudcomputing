@@ -31,20 +31,10 @@ and open the template in the editor.
                     <div class="navbar-header">
                         <a href=""><img class="logo" src="static/images/logo.png"></a>
                     </div>
-
-                    <a href="#" onclick="signOut1();">Sign out</a>
-                    <script>
-                      function signOut1() {
-                        var auth2 = gapi.auth2.getAuthInstance();
-                        auth2.signOut().then(function () {
-                          console.log('User signed out.');
-                        });
-                      }
-                    </script>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/">Home</a></li>
                         <li><a href="/viewlibrary">Library</a></li>
-                        <li><a href="/logout" onclick="signOut();">Logout</a></li>
+                        <li><a href="" onclick="signOut();">Logout</a></li>
                     </ul>
 
                 </div>

@@ -10,5 +10,7 @@ urlpatterns = [
     path('addsong', views.addsong, name = "addsong"),
     path('viewlibrary', views.viewlibrary, name="viewlibrary"),
     path('updatelibrary', views.updatelibrary, name="updatelibrary"),
-    path('logout', views.logout, name="logout")
+    path('logout', views.logout, name="logout"),
+    path('remove', views.remove, name='remove'),
+    path('update', views.update, name='update'),
 ]

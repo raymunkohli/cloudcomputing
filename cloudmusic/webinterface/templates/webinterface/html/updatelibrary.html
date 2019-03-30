@@ -9,6 +9,8 @@
         <th scope="col">Year</th>
         <th scope="col">Genre</th>
         <th scope="col">URL</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Remove</th>
     </tr>
 </thead>
 
@@ -22,6 +24,8 @@
     <td>{{song.year}}</td>
     <td>{{song.genre}}</td>
     <td>{{song.link}}</td>
+    <td> <a href=""><span class="glyphicon glyphicon-scissors" aria-hidden="true"></span></a></td>
+    <td> <a href="/remove?name={{song.idSong}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
 </tr>
 {% endfor %}
 </tbody>

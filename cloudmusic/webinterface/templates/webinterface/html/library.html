@@ -10,7 +10,8 @@ and open the template in the editor.
     <title>Personal Library</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <!-- jQuery library -->
-    <meta name="google-signin-client_id" content="599761015615-krb4hqvd1m6nsl18r1am0glvcbdakb3d.apps.googleusercontent.com">
+    <meta name="google-signin-client_id"
+        content="599761015615-krb4hqvd1m6nsl18r1am0glvcbdakb3d.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="static/js/googlejs.js"> </script>
@@ -41,10 +42,74 @@ and open the template in the editor.
                 </div>
                 <ul class="nav navbar-nav navbar-left">
                     <li><a href="/">Home</a></li>
-                    <li><a href="/logout" onclick="signOut();">Logout</a></li>
+                    <li><a onclick="signOut();">Logout</a></li>
                 </ul>
             </div>
         </nav>
+        {% for song in songs %}
+
+        <!-- Modal -->
+        <div class="modal fade" id="model{{song.idsong}}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/update" method="post">
+                        <div class="modal-body">
+                            <fieldset>
+                                <input type="hidden" id="form" name="id" value="{{song.idsong}}" required />
+                                <div class="control">
+                                    <label for="name">Name: </label>
+                                    <input type="text" id="form" name="name" value="{{song.song_name}}" required />
+                                </div>
+                                <div class="control">
+                                    <label for="language">Language: </label>
+                                    <input type="text" id="form" name="lang" value="{{song.language}}" required />
+                                </div>
+                                <div class="control">
+                                    <label for="artist">Artist: </label>
+                                    <input type="text" id="form" name="artist" value="{{song.artist}}" required />
+                                </div>
+                                <div class="control">
+                                    <label for="album">Album: </label>
+                                    <input type="text" id="form" name="album" value="{{song.album}}" required />
+                                </div>
+                                <div class="control">
+                                    <label for="year">Year: </label>
+                                    <input type="month" id="form" name="year" value="{{song.year}}" required />
+                                </div>
+                                <div class="control">
+                                    <label for="genre">Genre: </label>
+                                    <select name="genre" value="{{song.genre}}" required>
+                                        <option value="Blues">Blues</option>
+                                        <option value="Classical">Classical</option>
+                                        <option value="Country">Country</option>
+                                        <option value="Jazz">Jazz</option>
+                                        <option value="Rock">Rock</option>
+                                        <option value="Pop">Pop</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="control">
+                                    <label for="url">Youtube URL: </label>
+                                    <input type="url" id="form" name="url" value="{{song.link}}" required />
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-secondary">Apply</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
 
         <section id="list">
             <div class="container">
@@ -94,8 +159,8 @@ and open the template in the editor.
         </section>
         <br>
         <div id="tables">{% block content %}
-                <table class="table table-dark">
-                    <thead>
+            <table class="table table-dark">
+                <thead>
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Language</th>
@@ -104,62 +169,68 @@ and open the template in the editor.
                         <th scope="col">Year</th>
                         <th scope="col">Genre</th>
                         <th scope="col">URL</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Remove</th>
                     </tr>
                 </thead>
-                
+
                 <tbody>
-                {% for song in songs %}
-                <tr>
-                    <td>{{song.song_name}}</td>
-                    <td>{{song.language}}</td>
-                    <td>{{song.artist}}</td>
-                    <td>{{song.album}}</td>
-                    <td>{{song.year}}</td>
-                    <td>{{song.genre}}</td>
-                    <td>{{song.link}}</td>
-                </tr>
-                {% endfor %}
+                    {% for song in songs %}
+                    <tr>
+                        <td>{{song.song_name}}</td>
+                        <td>{{song.language}}</td>
+                        <td>{{song.artist}}</td>
+                        <td>{{song.album}}</td>
+                        <td>{{song.year}}</td>
+                        <td>{{song.genre}}</td>
+                        <td>{{song.link}}</td>
+                        <td> <a href="#model{{song.idsong}}" data-toggle="modal"><span
+                                    class="glyphicon glyphicon-scissors" aria-hidden="true"></span></a></td>
+                        <td> <a href="/remove?name={{song.idsong}}"><span class="glyphicon glyphicon-remove"
+                                    aria-hidden="true"></span></a></td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
-                
-                </table>
-                {% endblock %}</div>
-        <!--Information bit-->
-        <section id="information">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="static/images/musicCloud.png" width="100" height="50">
-                        <h4>Music</h4>
-                        <p>Find the music you like</p>
-                    </div>
 
-                    <div class="col-md-4">
-                        <img src="static/images/musicLib.png" width="100" height="50">
-                        <h4>Music Library</h4>
-                        <p>Find them, save them </p>
-                    </div>
+            </table>
+            {% endblock %}
+            <!--Information bit-->
+            <section id="information">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="static/images/musicCloud.png" width="100" height="50">
+                            <h4>Music</h4>
+                            <p>Find the music you like</p>
+                        </div>
 
-                    <div class="col-md-4">
-                        <img src="static/images/musicData.png" width="100" height="50">
-                        <h4>Data</h4>
-                        <p>Find the music you like</p>
+                        <div class="col-md-4">
+                            <img src="static/images/musicLib.png" width="100" height="50">
+                            <h4>Music Library</h4>
+                            <p>Find them, save them </p>
+                        </div>
+
+                        <div class="col-md-4">
+                            <img src="static/images/musicData.png" width="100" height="50">
+                            <h4>Data</h4>
+                            <p>Find the music you like</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!--Footer-->
-        <section id="footer">
-            <div class="container">
-                <div class="footer text-center">
-                    <h3>Join Us Now</h3>
-                    <p>Follow us on social media</p>
-                    <a href="#" class="fa fa-facebook"></a>
-                    <a href="#" class="fa fa-twitter"></a>
-                    <a href="#" class="fa fa-youtube"></a>
+            <!--Footer-->
+            <section id="footer">
+                <div class="container">
+                    <div class="footer text-center">
+                        <h3>Join Us Now</h3>
+                        <p>Follow us on social media</p>
+                        <a href="#" class="fa fa-facebook"></a>
+                        <a href="#" class="fa fa-twitter"></a>
+                        <a href="#" class="fa fa-youtube"></a>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
     </header>
 
@@ -173,7 +244,7 @@ and open the template in the editor.
             httpRequest.onreadystatechange = alertContents;
             httpRequest.open('POST', '/updatelibrary');
             data = {
-                name:x.form[1].value,
+                name: x.form[1].value,
                 lang: x.form[2].value,
                 artist: x.form[3].value,
                 album: x.form[4].value,

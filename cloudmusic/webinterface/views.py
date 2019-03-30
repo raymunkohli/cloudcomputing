@@ -76,3 +76,29 @@ def logout(request):
     request.session.modified = True
     return redirect("/")
 
+def remove(request):
+    songs = Song.objects.filter(
+        idsong__exact = request.GET.get("name"),
+        userid__exact = request.session.get('user')
+    )
+    if songs.count() == 1:
+        songs.delete()
+    return redirect("/viewlibrary")
+
+@csrf_exempt
+def update(request):
+    print(request.session.get('user'))
+    songs = Song.objects.filter(
+        idsong__exact = request.POST.get("id"),
+        userid__exact = request.session.get('user')
+    ).update(
+        song_name = request.POST.get("name"),
+        link = request.POST.get("url"),
+        language = request.POST.get("lang"),
+        year = request.POST.get("year"),
+        genre = request.POST.get("genre"),
+        artist = request.POST.get("artist"),
+        album = request.POST.get("album")
+        )
+    return redirect("/viewlibrary")
+
